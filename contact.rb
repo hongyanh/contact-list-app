@@ -16,7 +16,7 @@ class Contact
   class << self
     def create(name, email)
       # TODO: Will initialize a contact as well as add it to the list of contacts
-      $filedata << {:id => $filedata.count, :name => name, :email => email}
+      $filedata << {:id => $filedata.count+1, :name => name, :email => email}
       data = "#{name}, #{email}\n"
       ContactDatabase.write_data(data)
       #binding.pry
@@ -28,8 +28,7 @@ class Contact
  
     def all
       # TODO: Return the list of contacts, as is
-      
-      puts "id | name | email"
+      #puts "id | name | email"
       $filedata.each do |row|
         print_helper(row)
       end
@@ -39,11 +38,15 @@ class Contact
     def show(id)
       # TODO: Show a contact, based on ID
       contact = $filedata.find {|x| x[:id] == id.to_i }
-      print_helper(contact)
+      if contact.nil?
+        puts "not found"
+      else
+        print_helper(contact)
+      end
     end
 
     def print_helper(obj)
-      puts "#{obj[:id]} | #{obj[:name]} | #{obj[:email]}"
+      puts "#{obj[:id]}: #{obj[:name]} (#{obj[:email]})"
     end
   end
  

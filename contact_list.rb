@@ -16,6 +16,10 @@ when "help"
     find - Find a contact"
 when /^new\s[A-z]+\s[A-z]+\s.+@.+\.[A-z]+$/
   Contact.create("#{command.split(%r{\s})[1]} #{command.split(%r{\s})[2]}", command.split(%r{\s})[3])
+when "list"
+  Contact.all
+when /^show\s[0-9]+$/
+  Contact.show(command.split(%r{\s})[1])
 else
   puts "Undefined Command."
 end
