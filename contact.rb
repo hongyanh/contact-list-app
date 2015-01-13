@@ -16,14 +16,24 @@ class Contact
   class << self
     def create(name, email)
       # TODO: Will initialize a contact as well as add it to the list of contacts
-      $filedata << {:id => $filedata.count+1, :name => name, :email => email}
-      data = "#{name}, #{email}\n"
-      ContactDatabase.write_data(data)
+      if !$filedata.select {|x| x[:email] == email}.empty?
+        puts "The contact already exists"
+      else
+        $filedata << {:id => $filedata.count+1, :name => name, :email => email}
+        data = "#{name}, #{email}\n"
+        ContactDatabase.write_data(data)
+        puts "Save to id ##{$filedata.count}"
+      end
       #binding.pry
     end
  
     def find(index)
       # TODO: Will find and return contact by index
+      find_data = $filedata.select {|x| x[:name].match(/#{index}/) || x[:email].match(/#{index}/) }
+      find_data.each do |row|
+        print_helper(row)
+      end
+      puts "not found" if find_data.empty?
     end
  
     def all
