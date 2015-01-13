@@ -1,3 +1,5 @@
+require 'pry-byebug'
+
 class Contact
  
   attr_accessor :name, :email
@@ -22,12 +24,23 @@ class Contact
  
     def all
       # TODO: Return the list of contacts, as is
+      
+      puts "id | name | email"
+      $filedata.each do |row|
+        print_helper(row)
+      end
+      #binding.pry
     end
     
     def show(id)
       # TODO: Show a contact, based on ID
+      contact = $filedata.find {|x| x[:id] == id }
+      print_helper(contact)
     end
-    
+
+    def print_helper(obj)
+      puts "#{obj[:id]} | #{obj[:name]} | #{obj[:email]}"
+    end
   end
  
 end
