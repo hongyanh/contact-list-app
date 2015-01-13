@@ -14,9 +14,8 @@ class Contact
  
   ## Class Methods
   class << self
-    def create(name, email, phone)
+    def create(name, email, phone=nil)
       # TODO: Will initialize a contact as well as add it to the list of contacts
-      #binding.pry
       if !$filedata.select {|x| x[:email] == email}.empty?
         puts "The contact already exists"
       else
