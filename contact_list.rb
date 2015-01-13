@@ -13,8 +13,10 @@ if command[0] == "help"
     list - List all contacts
     show - Show a contact
     find - Find a contact"
+elsif command[0] == "new" && command[1].match(/[a-zA-Z]+/) && command[2].match(/[a-zA-Z]+/) && command[3].match(/.+@.+\.[a-zA-Z]+/) && command[4].match(/[a-zA-Z]+\:\d{3}\-\d{3}\-\d{4}/)
+      Contact.create("#{command[1]} #{command[2]}", command[3], command[4])
 elsif command[0] == "new" && command[1].match(/[a-zA-Z]+/) && command[2].match(/[a-zA-Z]+/) && command[3].match(/.+@.+\.[a-zA-Z]+$/)
-  Contact.create("#{command[1]} #{command[2]}", command[3])
+  Contact.create("#{command[1]} #{command[2]}", command[3], nil)
 elsif command[0] == "list"
   Contact.all
 elsif command[0] == "show" && command[1].match(/\d+/)

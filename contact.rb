@@ -14,17 +14,22 @@ class Contact
  
   ## Class Methods
   class << self
-    def create(name, email)
+    def create(name, email, phone)
       # TODO: Will initialize a contact as well as add it to the list of contacts
+      #binding.pry
       if !$filedata.select {|x| x[:email] == email}.empty?
         puts "The contact already exists"
       else
-        $filedata << {:id => $filedata.count+1, :name => name, :email => email}
-        data = "#{name}, #{email}\n"
+        if !phone.nil?
+          $filedata << {:id => $filedata.count+1, :name => name, :email => email, :phone => phone}
+          data = "#{name}, #{email}, #{phone}\n"
+        else
+          $filedata << {:id => $filedata.count+1, :name => name, :email => email}
+          data = "#{name}, #{email}\n"
+        end
         ContactDatabase.write_data(data)
         puts "Save to id ##{$filedata.count}"
       end
-      #binding.pry
     end
  
     def find(index)
@@ -56,7 +61,16 @@ class Contact
     end
 
     def print_helper(obj)
-      puts "#{obj[:id]}: #{obj[:name]} (#{obj[:email]})"
+      str =  "#{obj[:id]}: #{obj[:name]} (#{obj[:email]})"
+      if !obj[:phone].nil?
+        phones = obj[:phone].split('/')
+        phones.each do |phone|
+          phone.split(':').each do |p|
+            str << " #{p}"
+          end
+        end
+      end
+      puts str
     end
   end
  

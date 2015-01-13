@@ -1,5 +1,5 @@
 ## TODO: Implement CSV reading/writing
-require 'csv'
+#require 'csv'
 
 class ContactDatabase
   @@filename = "contacts.csv"
@@ -11,7 +11,8 @@ class ContactDatabase
   def self.read_data
     index = 1
     data = File.open(@@filename).readlines.each do |line| 
-      $filedata << {:id => index, :name => line.split(%r{,\s*})[0], :email => line.split(%r{,\s*})[1].chomp}
+      phone = line.split(%r{,\s*})[2].chomp unless line.split(%r{,\s*})[2].nil?
+      $filedata << {:id => index, :name => line.split(%r{,\s*})[0], :email => line.split(%r{,\s*})[1].chomp, :phone => phone }
       index += 1
     end
   end
