@@ -9,8 +9,10 @@ class ContactDatabase
   end
 
   def self.read_data
+    index = 0
     data = File.open(@@filename).readlines.each do |line| 
-      $filedata << {:id => line.split(%r{,\s*})[0], :name => line.split(%r{,\s*})[1], :email => line.split(%r{,\s*})[2].chomp}
+      $filedata << {:id => index, :name => line.split(%r{,\s*})[0], :email => line.split(%r{,\s*})[1].chomp}
+      index += 1
     end
   end
 

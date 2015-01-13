@@ -10,10 +10,12 @@ command = gets.chomp
 case command
 when "help"
   puts "Here is a list of available commands:
-    new  - Create a new contact
+    new  - Create a new contact (new firstname lastname email)
     list - List all contacts
     show - Show a contact
     find - Find a contact"
+when /^new\s[A-z]+\s[A-z]+\s.+@.+\.[A-z]+$/
+  puts "new line"
 else
   puts "Undefined Command."
 end

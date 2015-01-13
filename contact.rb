@@ -34,7 +34,7 @@ class Contact
     
     def show(id)
       # TODO: Show a contact, based on ID
-      contact = $filedata.find {|x| x[:id] == id }
+      contact = $filedata.find {|x| x[:id] == id.to_i }
       print_helper(contact)
     end
 
