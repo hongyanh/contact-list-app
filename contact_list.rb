@@ -9,7 +9,7 @@ command = ARGV
 #binding.pry
 if command[0] == "help"
   puts "Here is a list of available commands:
-    new  - Create a new contact (new firstname lastname email)
+    new  - Create a new contact (new firstname lastname email phone_type:xxx-xxx-xxxx/phone_type:xxx-xxx-xxxx)
     list - List all contacts
     show - Show a contact
     find - Find a contact"
