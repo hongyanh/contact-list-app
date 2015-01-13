@@ -16,6 +16,10 @@ class Contact
   class << self
     def create(name, email)
       # TODO: Will initialize a contact as well as add it to the list of contacts
+      $filedata << {:id => $filedata.count, :name => name, :email => email}
+      data = "#{name}, #{email}\n"
+      ContactDatabase.write_data(data)
+      #binding.pry
     end
  
     def find(index)

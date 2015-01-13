@@ -4,7 +4,7 @@ require 'pry'
 require 'pry-byebug'
 
 
-
+ContactDatabase.read_data
 print ">> "
 command = gets.chomp
 case command
@@ -15,13 +15,13 @@ when "help"
     show - Show a contact
     find - Find a contact"
 when /^new\s[A-z]+\s[A-z]+\s.+@.+\.[A-z]+$/
-  puts "new line"
+  Contact.create("#{command.split(%r{\s})[1]} #{command.split(%r{\s})[2]}", command.split(%r{\s})[3])
 else
   puts "Undefined Command."
 end
 
 #yan = Contact.new("Yan Hong", "onlyhongyan@gmail.com")
-ContactDatabase.read_data
-Contact.all
-Contact.show(gets.chomp)
+#ContactDatabase.read_data
+#Contact.all
+#Contact.show(gets.chomp)
 #binding.pry

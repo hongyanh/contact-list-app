@@ -17,8 +17,9 @@ class ContactDatabase
   end
 
   def self.write_data(data)
-    file = File.open(@@filename , "a")
-    file.close
+    open(@@filename, 'a') { |f|
+      f.puts data
+    }
   end
 
 end
